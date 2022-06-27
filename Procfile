@@ -1,1 +1,1 @@
-web: gunicorn DjangoAPI.wsgi
+web: gunicorn app:app --timeout 60
