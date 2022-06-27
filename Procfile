@@ -1,1 +1,1 @@
-web:gunicorn DjangoAPI:app
+gunicorn -b :5000 --access-logfile - --error-logfile - build:DjangoAPI
