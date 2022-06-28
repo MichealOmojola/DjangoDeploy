@@ -19,7 +19,7 @@ import pandas as pd
 from keras import backend as K
 # from .make_pickle_packable import make_keras_picklable
 
-
+import joblib
 
 
 
@@ -77,13 +77,18 @@ def ohevalue(df):
 # @api_view(["POST"])
 def approvereject(unit):
 
-    
+
 
     try:
-        with open(model_address, "rb") as input_file:
-            mdl = pickle.load(input_file)
-        with open(scaler_address, "rb") as input_file:
-            scalers = pickle.load(input_file)
+        mdl = joblib.load(model_address)
+        scalers = joblib.load(scaler_address)
+        
+        # joblib.load(filename, mmap_mode=None)
+        # joblib.load(filename, mmap_mode=None)
+        # with open(model_address, "rb") as input_file:
+        #     mdl = pickle.load(input_file)
+        # with open(scaler_address, "rb") as input_file:
+        #     scalers = pickle.load(input_file)
 
         # print(model_address)
 
