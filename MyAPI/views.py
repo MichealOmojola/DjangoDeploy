@@ -38,8 +38,11 @@ class ApprovalsView(viewsets.ModelViewSet):
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
-model_address = f'{dir_path}/loan_model.joblib'
-scaler_address = f'{dir_path}/scaler.joblib'
+# model_address = f'{dir_path}/loan_model.joblib'
+# scaler_address = f'{dir_path}/scaler.joblib'
+
+model_address = 'loan_model.joblib'
+scaler_address = 'scaler.joblib'
 
 def ohevalue(df):
         ohe_col = ['Dependents',
