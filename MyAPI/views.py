@@ -56,8 +56,7 @@ def make_keras_picklable():
     cls = Model
     cls.__reduce__ = __reduce__
 
-# Run the function
-make_keras_picklable()
+
 
 
 
@@ -110,6 +109,10 @@ def ohevalue(df):
 
 # @api_view(["POST"])
 def approvereject(unit):
+    
+    # Run the function
+    make_keras_picklable()
+
     try:
         with open(model_address, "rb") as input_file:
             mdl = pickle.load(input_file)
