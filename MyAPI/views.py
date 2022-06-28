@@ -23,10 +23,12 @@ import joblib
 
 # from unpickleload import make_keras_picklable
 
+import tensorflow as tf
 
 
-
-
+# @tf.function
+# def predict(model, df):
+#     return model.predict(x=df,verbose=0)
 
 
 
@@ -38,11 +40,11 @@ class ApprovalsView(viewsets.ModelViewSet):
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
-# model_address = f'{dir_path}/loan_model.joblib'
-# scaler_address = f'{dir_path}/scaler.joblib'
+model_address = f'{dir_path}/loan_model.pkl'
+scaler_address = f'{dir_path}/scaler.pkl'
 
-model_address = 'loan_model.joblib'
-scaler_address = 'scaler.joblib'
+# model_address = 'loan_model.joblib'
+# scaler_address = 'scaler.joblib'
 
 def ohevalue(df):
         ohe_col = ['Dependents',
@@ -87,12 +89,12 @@ def approvereject(unit):
         # joblib.load(filename, mmap_mode=None)
 
 
-        # with open(model_address, "rb") as input_file:
-        #     mdl = pickle.load(input_file)
-        # with open(scaler_address, "rb") as input_file:
-        #     scalers = pickle.load(input_file)
-        mdl = joblib.load(model_address)
-        scalers = joblib.load(scaler_address)
+        with open(model_address, "rb") as input_file:
+            mdl = pickle.load(input_file)
+        with open(scaler_address, "rb") as input_file:
+            scalers = pickle.load(input_file)
+        # mdl = joblib.load(model_address)
+        # scalers = joblib.load(scaler_address)
 
         # print(model_address)
 
@@ -101,7 +103,9 @@ def approvereject(unit):
         # unit = unit.reshape(1, -1)
         scalers.fit(unit)
         X=scalers.transform(unit)
-        y_pred=mdl.predict(X)
+        # y_pred=mdl.predict(X)
+        y_pred=mdl(X)
+        # y_pred=predict(mdl, X)
         y_pred=(y_pred > 0.45)
         # newdf = pd.DataFrame(y_pred, columns=['Status'])
         # newdf = newdf.replace({True:'Approved', False:'Rejected'})
