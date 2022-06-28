@@ -26,5 +26,4 @@ def main():
 if __name__ == '__main__':
     # Run the function
     make_keras_picklable()
-
     main()

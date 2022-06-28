@@ -25,7 +25,7 @@ import joblib
 
 
 
-
+import class_def
 
 
 
@@ -85,6 +85,8 @@ def approvereject(unit):
 
         # joblib.load(filename, mmap_mode=None)
         # joblib.load(filename, mmap_mode=None)
+
+
         with open(model_address, "rb") as input_file:
             mdl = pickle.load(input_file)
         with open(scaler_address, "rb") as input_file:
