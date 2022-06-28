@@ -38,8 +38,8 @@ class ApprovalsView(viewsets.ModelViewSet):
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
-model_address = f'{dir_path}/loan_model.pkl'
-scaler_address = f'{dir_path}/scaler.pkl'
+model_address = f'{dir_path}/loan_model.joblib'
+scaler_address = f'{dir_path}/scaler.joblib'
 
 def ohevalue(df):
         ohe_col = ['Dependents',
@@ -84,10 +84,12 @@ def approvereject(unit):
         # joblib.load(filename, mmap_mode=None)
 
 
-        with open(model_address, "rb") as input_file:
-            mdl = pickle.load(input_file)
-        with open(scaler_address, "rb") as input_file:
-            scalers = pickle.load(input_file)
+        # with open(model_address, "rb") as input_file:
+        #     mdl = pickle.load(input_file)
+        # with open(scaler_address, "rb") as input_file:
+        #     scalers = pickle.load(input_file)
+        mdl = joblib.load(model_address)
+        scalers = joblib.load(scaler_address)
 
         # print(model_address)
 
