@@ -21,7 +21,7 @@ from keras import backend as K
 
 import joblib
 
-
+# from unpickleload import make_keras_picklable
 
 
 
@@ -80,15 +80,15 @@ def approvereject(unit):
 
 
     try:
-        mdl = joblib.load(model_address)
-        scalers = joblib.load(scaler_address)
-        
+        # mdl = joblib.load(model_address)
+        # scalers = joblib.load(scaler_address)
+
         # joblib.load(filename, mmap_mode=None)
         # joblib.load(filename, mmap_mode=None)
-        # with open(model_address, "rb") as input_file:
-        #     mdl = pickle.load(input_file)
-        # with open(scaler_address, "rb") as input_file:
-        #     scalers = pickle.load(input_file)
+        with open(model_address, "rb") as input_file:
+            mdl = pickle.load(input_file)
+        with open(scaler_address, "rb") as input_file:
+            scalers = pickle.load(input_file)
 
         # print(model_address)
 
