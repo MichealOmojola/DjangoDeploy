@@ -23,8 +23,8 @@ import joblib
 
 # from unpickleload import make_keras_picklable
 
-import tensorflow as tf
-
+# import tensorflow as tf
+# import dill
 
 # @tf.function
 # def predict(model, df):
@@ -43,38 +43,137 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 model_address = f'{dir_path}/loan_model.pkl'
 scaler_address = f'{dir_path}/scaler.pkl'
 
+
+import pickle
+
+# class MyCustomUnpickler(pickle.Unpickler):
+#     def find_class(self, module, name):
+#         if module == "__main__":
+#             module = "program"
+#         return super().find_class(module, name)
+
+
+
+
+# def read_pickle(address):
+#     with open(address, "rb") as input:
+#         data= dill.load(input)
+#     return data
+
+def read_pickle(address):
+    data = joblib.load(address)
+    return data
+
+
+def convert_nums(num):
+    if num == "3+":
+        return 3
+    elif num == "2":
+        return 2
+    elif num == "1":
+        return 1
+    elif num == "0":
+        return 0
+    else:
+        return 0
 # model_address = 'loan_model.joblib'
 # scaler_address = 'scaler.joblib'
 
-def ohevalue(df):
-        ohe_col = ['Dependents',
-         'ApplicantIncome',
-         'CoapplicantIncome',
-         'LoanAmount',
-         'Loan_Amount_Term',
-         'Credit_History',
-         'Gender_Female',
-         'Gender_Male',
-         'Married_No',
-         'Married_Yes',
-         'Education_Graduate',
-         'Education_Not_Graduate',
-         'Self_Employed_No',
-         'Self_Employed_Yes',
-         'Property_Area_Rural',
-         'Property_Area_Semiurban',
-         'Property_Area_Urban']
+# def ohevalue(df):
+#     ohe_col = ['Dependents',
+#         'ApplicantIncome',
+#         'CoapplicantIncome',
+#         'LoanAmount',
+#         'Loan_Amount_Term',
+#         'Credit_History',
+#         'Gender_Female',
+#         'Gender_Male',
+#         'Married_No',
+#         'Married_Yes',
+#         'Education_Graduate',
+#         'Education_Not_Graduate',
+#         'Self_Employed_No',
+#         'Self_Employed_Yes',
+#         'Property_Area_Rural',
+#         'Property_Area_Semiurban',
+#         'Property_Area_Urban']
 
-        cat_columns = ['Gender', 'Married', 'Education', 'Self_Employed', 'Property_Area']
-        df_processed = pd.get_dummies(df, columns=cat_columns)
-        newdict = {}
-        for i in ohe_col:
-            if i in df_processed.columns:
-                newdict[i] = df_processed[i].values
-            else:
-                newdict[i] = 0
-        newdf = pd.DataFrame(newdict)
-        return newdf
+#     cat_columns = ['Gender', 'Married', 'Education', 'Self_Employed', 'Property_Area']
+#     df_processed = pd.get_dummies(df, columns=cat_columns)
+#     newdict = {}
+#     for i in ohe_col:
+#         if i in df_processed.columns:
+#             newdict[i] = df_processed[i].values
+#         else:
+#             newdict[i] = 0
+#     newdf = pd.DataFrame(newdict)
+#     return newdf
+
+ohe_col = ['Dependents',
+            'ApplicantIncome',
+            'CoapplicantIncome',
+            'LoanAmount',
+            'Loan_Amount_Term',
+            'Credit_History',
+            'Gender_Female',
+            'Gender_Male',
+            'Married_No',
+            'Married_Yes',
+            'Education_Graduate',
+            'Education_Not_Graduate',
+            'Self_Employed_No',
+            'Self_Employed_Yes',
+            'Property_Area_Rural',
+            'Property_Area_Semiurban',
+            'Property_Area_Urban']
+
+def myPreprocessor(myDict):
+    df = pd.DataFrame(myDict, index = [0])
+
+    # df = pd.DataFrame(myDict, index = [0])
+    # df = df[['Gender',
+    #         'Married',
+    #         'Dependents',
+    #         'Education',
+    #         'Self_Employed',
+    #         'ApplicantIncome',
+    #         'CoapplicantIncome',
+    #         'LoanAmount',
+    #         'Loan_Amount_Term',
+    #         'Credit_History',
+    #         'Property_Area']]
+    # print(df.columns)
+    # df['Dependents'] = df['Dependents'].apply(convert_nums)
+    # df['LoanAmount'] = df['LoanAmount'].replace(np.nan, 0, regex=True)
+    # df['Loan_Amount_Term'] = df['Loan_Amount_Term'].replace(np.nan, 0, regex=True)
+
+
+
+    #########################################
+    cat_columns = ['Gender', 'Married', 'Education', 'Self_Employed', 'Property_Area']
+    # cat_columns_dfs = pd.get_dummies(df[cat_columns])
+    # df_without_cat = df.drop(cat_columns, axis = 1)
+    # df_processed = pd.concat([cat_columns_dfs, df_without_cat], axis = 1)
+    #########################################
+
+
+
+
+
+    # df_processed = pd.get_dummies(cat_columns_dfs)
+    # print(cat_columns)
+    # print(df[cat_columns])
+    df_processed = pd.get_dummies(df, columns=cat_columns)
+    newdict = {}
+    for i in ohe_col:
+        if i in df_processed.columns:
+            newdict[i] = df_processed[i].values
+        else:
+            newdict[i] = 0
+    newdf = pd.DataFrame(newdict)
+
+    return newdf
+
 
 # @api_view(["POST"])
 def approvereject(unit):
@@ -89,10 +188,32 @@ def approvereject(unit):
         # joblib.load(filename, mmap_mode=None)
 
 
-        with open(model_address, "rb") as input_file:
-            mdl = pickle.load(input_file)
-        with open(scaler_address, "rb") as input_file:
-            scalers = pickle.load(input_file)
+        # with open(model_address, "rb") as input_file:
+        #     mdl = pickle.load(input_file)
+        # with open(scaler_address, "rb") as input_file:
+        #     scalers = pickle.load(input_file)
+
+
+
+        #########################################
+        # with open(model_address, 'rb') as f:
+        #     unpickler = MyCustomUnpickler(f)
+        #     mdl = unpickler.load()
+
+        # with open(scaler_address, 'rb') as f:
+        #     unpickler = MyCustomUnpickler(f)
+        #     scalers = unpickler.load()
+        #########################################
+
+
+
+        # mdl = read_pickle(model_address)
+        # scalers = read_pickle(scaler_address)
+        mdl = joblib.load(model_address)
+        scalers = joblib.load(scaler_address)
+
+
+
         # mdl = joblib.load(model_address)
         # scalers = joblib.load(scaler_address)
 
@@ -105,6 +226,7 @@ def approvereject(unit):
         X=scalers.transform(unit)
         # y_pred=mdl.predict(X)
         y_pred=mdl(X)
+        print(y_pred)
         # y_pred=predict(mdl, X)
         y_pred=(y_pred > 0.45)
         # newdf = pd.DataFrame(y_pred, columns=['Status'])
@@ -117,6 +239,7 @@ def approvereject(unit):
         #     # return JsonResponse(f'You are eligible for a loan.', safe=False)
         newdf=pd.DataFrame(y_pred, columns=['Status'])
         newdf=newdf.replace({True:'Approved', False:'Rejected'})
+        print(newdf)
         K.clear_session()
         return (newdf.values[0][0],X[0])
     except ValueError as e:
@@ -140,10 +263,19 @@ def cxcontact(request):
             Self_Employed=form.cleaned_data['Self_Employed']
             Property_Area=form.cleaned_data['Property_Area']
             myDict = (request.POST).dict()
-            df = pd.DataFrame(myDict, index = [0])
-            answer = approvereject(ohevalue(df))[0]
+
+
+            # answer = approvereject(ohevalue(df))[0]
+            # for e in ['firstname', 'lastname','csrfmiddlewaretoken']:
+            #     myDict.pop(e)
+
+            df = myPreprocessor(myDict)
+            # print(list(df.columns))
+            # print(list(df.values))
+            # answer = approvereject(ohevalue(df))
+            answer = approvereject(df)[0]
             # print(approvereject(ohevalue(df)))
-            Xscalers = approvereject(ohevalue(df))[1]
+            # Xscalers = approvereject(ohevalue(df))[1]
             messages.success(request, 'Application Status: {}'.format(answer))
 
             # print(approvereject(ohevalue(df)))

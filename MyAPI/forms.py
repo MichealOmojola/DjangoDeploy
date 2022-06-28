@@ -37,7 +37,7 @@ class ApprovalForm(forms.Form):
     LoanAmount = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'Enter Loan Amount'}))
     Loan_Amount_Term = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'Enter Term in Months'}))
     Credit_History = forms.ChoiceField(choices=CREDIT_HISTORY_CHOICES)
-    Gender = forms.ChoiceField(choices=GRADUATED_CHOICES)
+    Gender = forms.ChoiceField(choices=GENDER_CHOICES)
     Married = forms.ChoiceField(choices=MARRIED_CHOICES)
     Education = forms.ChoiceField(choices=GRADUATED_CHOICES)
     Self_Employed = forms.ChoiceField(choices=SELFEMPLOYED_CHOICES)
