@@ -53,5 +53,5 @@ def main():
 
 
 if __name__ == '__main__':
-    make_keras_picklable()
+    # make_keras_picklable()
     main()
