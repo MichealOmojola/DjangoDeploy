@@ -39,4 +39,4 @@ class approvals(models.Model):
     area = models.CharField(max_length=15, choices=PROPERTY_CHOICES)
 
     def __str__(self) -> str:
-        return self.firstname, self.firstname
+        return '{}, {}'.format(self.lastname, self.firstname)

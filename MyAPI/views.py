@@ -13,7 +13,8 @@ import pandas as pd
 from keras import backend as K
 # from .make_pickle_packable import make_keras_picklable
 # from .unpickleload import *
-import joblib
+# import joblib
+# from .sklearn.externals import joblib
 
 # from unpickleload import make_keras_picklable
 
@@ -30,6 +31,11 @@ scaler_address = f'{dir_path}/scaler.pkl'
 def read_pickle(address):
     data = pickle.load(open(address,'rb'))
     return data
+
+# def read_joblib(address):
+#     data = joblib(address)
+#     # data = joblib(open(address,'rb'))
+#     return data
 
 ohe_col = ['Dependents',
             'ApplicantIncome',
