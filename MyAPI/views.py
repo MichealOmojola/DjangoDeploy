@@ -33,7 +33,7 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 model_address = f'{dir_path}/loan_model.joblib'
 scaler_address = f'{dir_path}/scaler.joblib'
 
-def read_pickle(address):
+def read_joblib(address):
     data = joblib.load(address)
     return data
 
@@ -79,8 +79,8 @@ def myPreprocessor(myDict):
 # @api_view(["POST"])
 def approvereject(unit):
     try:
-        mdl = joblib.load(model_address)
-        scalers = joblib.load(scaler_address)
+        mdl = read_joblib(model_address)
+        scalers = read_joblib(scaler_address)
         scalers.fit(unit)
         X=scalers.transform(unit)
         y_pred=mdl(X)
