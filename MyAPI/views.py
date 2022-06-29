@@ -1,11 +1,7 @@
 from django.shortcuts import render
 # from .forms import MyForm
-from rest_framework import viewsets, status
+from rest_framework import viewsets
 from rest_framework.decorators import api_view
-from django.core import serializers
-from rest_framework.response import Response
-from django.http import JsonResponse
-from rest_framework.parsers import JSONParser
 from django.contrib import messages
 from .forms import ApprovalForm
 from .models import approvals
@@ -13,12 +9,10 @@ from .serializers import approvalSerializers
 import os
 import pickle
 # from sklearn.externals import joblib
-import json
-import numpy as np
 import pandas as pd
 from keras import backend as K
 # from .make_pickle_packable import make_keras_picklable
-
+# from .unpickleload import *
 import joblib
 
 # from unpickleload import make_keras_picklable
@@ -30,11 +24,11 @@ class ApprovalsView(viewsets.ModelViewSet):
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
-model_address = f'{dir_path}/loan_model.joblib'
-scaler_address = f'{dir_path}/scaler.joblib'
+model_address = f'{dir_path}/loan_model.pkl'
+scaler_address = f'{dir_path}/scaler.pkl'
 
-def read_joblib(address):
-    data = joblib.load(address)
+def read_pickle(address):
+    data = pickle.load(open(address,'rb'))
     return data
 
 ohe_col = ['Dependents',
@@ -78,8 +72,8 @@ def myPreprocessor(myDict):
 # @api_view(["POST"])
 def approvereject(unit):
     try:
-        mdl = read_joblib(model_address)
-        scalers = read_joblib(scaler_address)
+        mdl = read_pickle(model_address)
+        scalers = read_pickle(scaler_address)
         scalers.fit(unit)
         X=scalers.transform(unit)
         y_pred=mdl(X)

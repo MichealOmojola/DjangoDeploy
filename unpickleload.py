@@ -1,6 +1,6 @@
 import pickle
-from tensorflow.keras.models import Model
-# from tensorflow.python.keras.engine.training import Model
+# from tensorflow.keras.models import Model
+from tensorflow.python.keras.engine.training import Model
 from tensorflow.python.keras.layers import deserialize, serialize
 from tensorflow.python.keras.saving import saving_utils
 
