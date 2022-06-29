@@ -27,7 +27,7 @@ SECRET_KEY = '6k#n6j4x)^=zx$21hh!gh@d75-vfaj5l0es^)@le0(#s^!m@#x'
 DEBUG = True
 
 ALLOWED_HOSTS = ['page-machine-learning-app.herokuapp.com', '127.0.0.1']
-# ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = []
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -35,10 +35,6 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # Application definition
-TEMPLATES_DIR=os.path.join(BASE_DIR,'templates')
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -144,5 +140,4 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-# STATIC_URL = '/static/'
-# STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATIC_URL = '/static/'
