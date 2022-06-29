@@ -1,4 +1,4 @@
-Django==2.2.4
+Django>=3.2
 gunicorn==19.9.0
 djangorestframework==3.10.2
 tensorflow-cpu==2.7.0
@@ -9,3 +9,5 @@ sklearn==0.0
 django-crispy-forms==1.14.0
 psycopg2==2.9.3
 joblib==1.0.0
+django-cors-headers==3.13.0
+# whitenoise==6.2.0
