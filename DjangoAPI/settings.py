@@ -36,6 +36,10 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # Application definition
 
+
+TEMPLATES_DIR=os.path.join(BASE_DIR,'templates')
+
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
