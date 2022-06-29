@@ -26,8 +26,8 @@ SECRET_KEY = '6k#n6j4x)^=zx$21hh!gh@d75-vfaj5l0es^)@le0(#s^!m@#x'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = ['page-machine-learning-app.herokuapp.com', '127.0.0.1']
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['page-machine-learning-app.herokuapp.com', '127.0.0.1']
+# ALLOWED_HOSTS = ['*']
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -146,5 +146,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-import django_heroku
-django_heroku.settings(locals())
+# import django-heroku
+# django_heroku.settings(locals())
