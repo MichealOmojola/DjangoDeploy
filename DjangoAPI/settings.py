@@ -35,8 +35,6 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # Application definition
-MODELS = os.path.join(BASE_DIR, 'MyAPI')
-
 TEMPLATES_DIR=os.path.join(BASE_DIR,'templates')
 
 
