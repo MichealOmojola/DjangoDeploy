@@ -30,25 +30,13 @@ class ApprovalsView(viewsets.ModelViewSet):
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
-model_address = f'{dir_path}/loan_model.pkl'
-scaler_address = f'{dir_path}/scaler.pkl'
+model_address = f'{dir_path}/loan_model.joblib'
+scaler_address = f'{dir_path}/scaler.joblib'
 
 def read_pickle(address):
     data = joblib.load(address)
     return data
 
-
-def convert_nums(num):
-    if num == "3+":
-        return 3
-    elif num == "2":
-        return 2
-    elif num == "1":
-        return 1
-    elif num == "0":
-        return 0
-    else:
-        return 0
 
 ohe_col = ['Dependents',
             'ApplicantIncome',
@@ -98,10 +86,9 @@ def approvereject(unit):
         y_pred=mdl(X)
         y_pred=(y_pred > 0.45)
         newdf=pd.DataFrame(y_pred, columns=['Status'])
-        newdf=newdf.replace({True:'Approved', False:'Rejected'})
-        print(newdf)
+        result=newdf.replace({True:'Approved', False:'Rejected'}).values[0][0]
         K.clear_session()
-        return (newdf.values[0][0],X[0])
+        return result
     except ValueError as e:
         return (e.args[0])
 
@@ -124,7 +111,7 @@ def cxcontact(request):
             Property_Area=form.cleaned_data['Property_Area']
             myDict = (request.POST).dict()
             df = myPreprocessor(myDict)
-            answer = approvereject(df)[0]
+            answer = approvereject(df)
             messages.success(request, 'Application Status: {}'.format(answer))
 
     form=ApprovalForm()
