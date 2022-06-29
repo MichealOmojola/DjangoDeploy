@@ -37,7 +37,6 @@ def read_joblib(address):
     data = joblib.load(address)
     return data
 
-
 ohe_col = ['Dependents',
             'ApplicantIncome',
             'CoapplicantIncome',
