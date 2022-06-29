@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import re_path, include
 from rest_framework import routers
 from . import views
 
@@ -10,6 +10,6 @@ urlpatterns = [
 
     # path('api/', include(router.urls)),
     # path('status/', views.approvereject),
-    path('', views.cxcontact, name='form')
+    re_path('', views.cxcontact, name='form')
     # path('admin/', admin.site.urls)
 ]
