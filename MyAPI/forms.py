@@ -32,7 +32,7 @@ class ApprovalForm(forms.Form):
     email = forms.CharField(label='EMAIL', max_length=150, widget=forms.TextInput(attrs={'placeholder': 'Enter Email'}))
     phonenumber = forms.CharField(label='PHONE NUMBER', max_length=150, widget=forms.TextInput(attrs={'placeholder': 'Enter Phone Number'}))
     Dependents = forms.IntegerField(label='NUMBER OF DEPENDANTS', widget=forms.TextInput(attrs={'placeholder': 'Enter Number of Dependents'}))
-    ApplicantIncome = forms.IntegerField(label="APPLICANT'S INCOME", widget=forms.TextInput(attrs={'placeholder': 'Enter Monthly Gross Income'}))
+    ApplicantIncome = forms.IntegerField(label="APPLICANT'S INCOME", widget=forms.TextInput(attrs={'placeholder': 'Enter Yearly Gross Income'}))
     LoanAmount = forms.IntegerField(label="LOAN AMOUNT", widget=forms.TextInput(attrs={'placeholder': 'Enter Loan Amount'}))
     Loan_Amount_Term = forms.IntegerField(label='LOAN TENOR IN DAYS', widget=forms.TextInput(attrs={'placeholder': 'Enter Loan Tenor'}))
     Credit_History = forms.ChoiceField(label='CREDIT HISTORY', choices=CREDIT_HISTORY_CHOICES)
