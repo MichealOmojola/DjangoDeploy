@@ -11,21 +11,7 @@
 {% load static %}
 {% load crispy_forms_tags %}
 	<div class = "mx-2 my-6">
-			{% comment %} <div class="row" style="background-color:#050505">
-				<div class="col-sm-4">
-					<img src="{% static '/images/loan2.png' %}" alt="Banner" style="width:500px;height:250px;"  href="{% static 'favicon.ico' %}"></img>
-				</div>
-				<div class="col-sm-4">
-					<img src="{% static '/images/loan1.png' %}" alt="Powered By Python" style="width:500px;height:250px;"  href="{% static 'favicon.ico' %}"></img>
-				</div>
-				<div class="col-sm-4">
-					<img src="{% static '/images/loan3.png' %}" alt="Social" style="width:500px;height:250px;"  href="{% static 'favicon.ico' %}"></img>
-				</div>
-			</div> {% endcomment %}
-			{% comment %} <div class="row" style="background-color:#050505"><br></div> {% endcomment %}
 			<div class="row" style="background-color:#050505">
-
-
 				<div class="col-sm-12">
 					<table style="border-collapse: separate; border-spacing: 40px;">
 						<td><img src="{% static '/images/page.png' %}" alt="Banner" style="width:200px;height:200px;"></img></td>
@@ -49,27 +35,15 @@
 						<td><h1><a href="#" style="color:white">Logout</a><h1></td>
 					</table>
 
-					{% comment %} <table style="border-collapse: separate; border-spacing: 40px;">
-						<td><h1><a href="#" style="color:white">Logout</a><h1></td>
-					</table> {% endcomment %}
 
 				</div>
-
-				{% comment %} <div class="col-sm-6">
-				</div> {% endcomment %}
-
-				{% comment %} <div class="col-sm-1">
-					<table style="border-collapse: separate; border-spacing: 40px;">
-						<td><h1><a href="#" style="color:white">Logout</a><h1></td>
-					</table>
-				</div> {% endcomment %}
 
 
 			</div>
 			<div class="row">
 				<div class= "col"></div>
 				<div class = "col-6 my-5">
-					<h1>Loan Form</h1><br>
+					<h1 style="color: #111; font-family: 'Helvetica Neue', sans-serif; font-size: 85px; font-weight: bold; letter-spacing: -1px; line-height: 1; text-align: center; ">Loan Feasibility Form</h1><br>
 					<form method='post'>
 						{% csrf_token %}
 						{{form|crispy}}
