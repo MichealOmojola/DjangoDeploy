@@ -32,8 +32,14 @@ ALLOWED_HOSTS = ['page-machine-learning-app.herokuapp.com', '127.0.0.1']
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATIC_URL = '/static/'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATIC_URL = '//static.MYDOMAIN.com/'
+STATIC_ROOT = '/home/USER/public_html/static.MYDOMAIN.com/'
+
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -144,3 +150,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    # other context processors....
+    'django.core.context_processors.static',
+    # other context processors....
+)
