@@ -29,6 +29,8 @@ class ApprovalForm(forms.Form):
 
     firstname = forms.CharField(label='FIRST NAME', max_length=150, widget=forms.TextInput(attrs={'placeholder': 'Enter Firstname'}))
     lastname = forms.CharField(label='LAST NAME', max_length=150, widget=forms.TextInput(attrs={'placeholder': 'Enter Lastname'}))
+    email = forms.EmailField(label='EMAIL', max_length=150, widget=forms.TextInput(attrs={'placeholder': 'Enter Email'}))
+    phonenumber = forms.CharField(label='PHONE NUMBER', max_length=150, widget=forms.TextInput(attrs={'placeholder': 'Enter Phone Number'}))
     Dependents = forms.IntegerField(label='NUMBER OF DEPENDANTS', widget=forms.TextInput(attrs={'placeholder': 'Enter Number of Dependents'}))
     ApplicantIncome = forms.IntegerField(label="APPLICANT'S INCOME", widget=forms.TextInput(attrs={'placeholder': 'Enter Monthly Gross Income'}))
     LoanAmount = forms.IntegerField(label="LOAN AMOUNT", widget=forms.TextInput(attrs={'placeholder': 'Enter Loan Amount'}))
