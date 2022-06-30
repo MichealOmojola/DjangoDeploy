@@ -33,7 +33,6 @@ class ApprovalForm(forms.Form):
     lastname = forms.CharField(max_length=150, widget=forms.TextInput(attrs={'placeholder': 'Enter Lastname'}))
     Dependents = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'Enter Number of Dependents'}))
     ApplicantIncome = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'Enter Monthly Gross Income'}))
-    CoapplicantIncome = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'Enter Co-Applicant Monthly Gross Income'}))
     LoanAmount = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'Enter Loan Amount'}))
     Loan_Amount_Term = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'Enter Term in Months'}))
     Credit_History = forms.ChoiceField(choices=CREDIT_HISTORY_CHOICES)

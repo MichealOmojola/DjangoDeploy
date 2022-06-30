@@ -11,9 +11,12 @@ import pickle
 # from sklearn.externals import joblib
 import pandas as pd
 from keras import backend as K
+import tensorflow as tf
+# from tensorflow.keras.models import load_model
+
 # from .make_pickle_packable import make_keras_picklable
 # from .unpickleload import *
-# import joblib
+import joblib
 # from .sklearn.externals import joblib
 
 # from unpickleload import make_keras_picklable
@@ -25,21 +28,24 @@ class ApprovalsView(viewsets.ModelViewSet):
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
-model_address = f'{dir_path}/loan_model.pkl'
-scaler_address = f'{dir_path}/scaler.pkl'
+model_address = f'{dir_path}/gfgModel.h5'
+scaler_address = f'{dir_path}/scaler.joblib'
 
-def read_pickle(address):
-    data = pickle.load(open(address,'rb'))
+# def read_pickle(address):
+#     data = pickle.load(open(address,'rb'))
+#     return data
+
+def load_model_(address):
+    data = tf.keras.models.load_model(address)
     return data
 
-# def read_joblib(address):
-#     data = joblib(address)
-#     # data = joblib(open(address,'rb'))
-#     return data
+
+def load_joblib(address):
+    data = joblib.load(open(address,'rb'))
+    return data
 
 ohe_col = ['Dependents',
             'ApplicantIncome',
-            'CoapplicantIncome',
             'LoanAmount',
             'Loan_Amount_Term',
             'Credit_History',
@@ -78,12 +84,11 @@ def myPreprocessor(myDict):
 # @api_view(["POST"])
 def approvereject(unit):
     try:
-        mdl = read_pickle(model_address)
-        scalers = read_pickle(scaler_address)
-        scalers.fit(unit)
+        mdl = load_model_(model_address)
+        scalers = load_joblib(scaler_address)
         X=scalers.transform(unit)
         y_pred=mdl(X)
-        y_pred=(y_pred > 0.45)
+        y_pred=(y_pred > 1e-04)
         newdf=pd.DataFrame(y_pred, columns=['Status'])
         result=newdf.replace({True:'Approved', False:'Rejected'}).values[0][0]
         K.clear_session()
@@ -100,7 +105,6 @@ def cxcontact(request):
             lastname=form.cleaned_data['lastname']
             Dependents=form.cleaned_data['Dependents']
             ApplicantIncome=form.cleaned_data['ApplicantIncome']
-            CoapplicantIncome=form.cleaned_data['CoapplicantIncome']
             LoanAmount=form.cleaned_data['LoanAmount']
             Loan_Amount_Term=form.cleaned_data['Loan_Amount_Term']
             Credit_History=form.cleaned_data['Credit_History']
