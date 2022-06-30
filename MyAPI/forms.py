@@ -34,7 +34,7 @@ class ApprovalForm(forms.Form):
     Dependents = forms.IntegerField(label='NUMBER OF DEPENDANTS', widget=forms.TextInput(attrs={'placeholder': 'Enter Number of Dependents'}))
     ApplicantIncome = forms.IntegerField(label="APPLICANT'S INCOME", widget=forms.TextInput(attrs={'placeholder': 'Enter Yearly Gross Income'}))
     LoanAmount = forms.IntegerField(label="LOAN AMOUNT", widget=forms.TextInput(attrs={'placeholder': 'Enter Loan Amount'}))
-    Loan_Amount_Term = forms.IntegerField(label='LOAN TENOR IN DAYS', widget=forms.TextInput(attrs={'placeholder': 'Enter Loan Tenor'}))
+    Loan_Amount_Term = forms.IntegerField(label='LOAN TENOR IN DAYS', widget=forms.TextInput(attrs={'placeholder': 'Enter Loan Tenure'}))
     Credit_History = forms.ChoiceField(label='CREDIT HISTORY', choices=CREDIT_HISTORY_CHOICES)
     Gender = forms.ChoiceField(label='GENDER', choices=GENDER_CHOICES)
     Married = forms.ChoiceField(label='MARITAL STATUS', choices=MARRIED_CHOICES)
