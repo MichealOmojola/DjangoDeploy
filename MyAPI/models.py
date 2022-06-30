@@ -26,8 +26,8 @@ class approvals(models.Model):
 
     firstname = models.CharField(max_length=15)
     lastname = models.CharField(max_length=15)
-    email = models.EmailField(max_length=150)
-    phonenumber = models.EmailField(max_length=150)
+    email = models.CharField(max_length=150)
+    phonenumber = models.CharField(max_length=150)
     dependents = models.IntegerField(default=0)
     applicantincome = models.IntegerField(default=0)
     coapplicantincome = models.IntegerField(default=0)
